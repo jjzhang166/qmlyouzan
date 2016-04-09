@@ -10,6 +10,10 @@ ListView{
     delegate: YouzanItem{
         height: 400
         width: parent.width
+        zanId: tid
+        zanorders: orders
+        zanordersContent: ordersContent
+        zantrade: trade
     }
     Component.onCompleted: {
         searchTrades("2016-03-09 00:00:00","2016-05-09 00:00:00")

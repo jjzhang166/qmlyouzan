@@ -54,17 +54,12 @@ Item{
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: name3.top
             border.color: "white"
-            TextArea {
+            TextEdit {
                 id: name2
                 anchors.fill: parent
                 readOnly: true
-                text: zanorders+"\n"+zanordersContent+"\n"+zantrade
-                style: TextAreaStyle {
-                        textColor: "#333"
-                        selectionColor: "steelblue"
-                        selectedTextColor: "#eee"
-                        backgroundColor: "#ffffff"
-                    }
+                textFormat: TextEdit.RichText
+                text: zanorders+"<br><br>"+zanordersContent+"<br><br>"+zantrade
             }
         }
         Button {
@@ -88,6 +83,11 @@ Item{
                 signalClicked();
             }
         }
+    }
+
+    function gethtmlcontents(){
+        console.log("text is "+name2.text)
+        return name2.text;
     }
 }
 

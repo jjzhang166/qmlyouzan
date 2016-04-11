@@ -8,7 +8,11 @@ ApplicationWindow {
     width: 500
     height: 480
     visible: true
-
+    //与C++进行通信的对象
+    Connections {
+        target: yzObj
+        onSignalPrintFinished: console.log("The print page data finished!")
+    }
     //顶部的标题栏
     Rectangle{
         id: tid
@@ -46,6 +50,7 @@ ApplicationWindow {
         color: "#12AADF"
         border.width: 1
         border.color: "grey"
+        visible: yz.modelCount>0
         MouseArea{
             id:ma2
             anchors.fill: parent
@@ -82,6 +87,7 @@ ApplicationWindow {
         color: "#12AADF"
         border.width: 1
         border.color: "grey"
+        visible: yz.modelCount>0
         MouseArea{
             id:ma
             anchors.fill: parent

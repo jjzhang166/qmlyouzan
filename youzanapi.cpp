@@ -9,8 +9,8 @@ void YouZanApi::initData(QString starttime,QString endTime)
 {
     QString startCreated =starttime;
     QString endCreadted = endTime;
-    QString secret="1ee9aadc7612a450b28aa6222617e71a";
-    QString appid="e1b70429940cd4aa66";
+    QString secret="secret";
+    QString appid="appid";
 
     QDateTime currentDate=QDateTime::currentDateTime();
     QString method="kdt.trades.sold.get";//调用第三方接口函数

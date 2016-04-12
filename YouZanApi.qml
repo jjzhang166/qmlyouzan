@@ -3,23 +3,27 @@ import QtQuick 2.0
 ListView{
     id:tradeView
     anchors.fill: parent
+    property alias modelCount: tradesModel.count
     ListModel{
         id:tradesModel
     }
-    model: 4;//tradesModel
-    delegate: YouzanItem{
+    model: 4//tradesModel
+    delegate: YouzanItem {
         height: 400
         width: parent.width
         zanId: tid
         zanorders: orders
         zanordersContent: ordersContent
         zantrade: trade
+        onSignalClicked: {
+            //每个订单的打印按钮
+            yzObj.setCurrentPrintContents(gethtmlcontents());
+            yzObj.openPrinfDialog(true);
+        }
     }
     Component.onCompleted: {
         searchTrades("2016-03-09 00:00:00","2016-05-09 00:00:00")
-//        searchTrades("","");
     }
-
     function searchTrades(startDate,endDate){
         tradesModel.clear();//清空列表
         var request=new XMLHttpRequest();
@@ -27,7 +31,7 @@ ListView{
         //监听onreadystatechange事件
         request.onreadystatechange=function(){
             if(request.readyState===request.DONE){
-                console.log("-----微信号是多少?---- "+(request.responseText.length));
+                console.log("-----微信号是多少?---- "+(request.responseText.toString()));
 //                tradesModel.append({});
 //                return;
                 data=JSON.parse(request.responseText.toString());
@@ -103,8 +107,8 @@ ListView{
         var startCreated=startDate;
         var endCreadted=endDate;
 
-        var secret="修改";
-        var appid="修改";
+        var secret="secret";
+        var appid="appid";
         var currentDate=new Date();
         var method="kdt.trades.sold.get";//调用第三方接口函数
 
@@ -130,12 +134,3 @@ ListView{
         request.send();
     }
 }
-
-
-//https://open.koudaitong.com/api/entry?sign=74d4c18b9f077ed998feb10e96c58497
-//&timestamp=2013-05-06%2013:52:03&v=1.0&app_id=test&method=kdt.item.get
-//&sign_method=md5&format=json&num_iid=383829342
-
-//https://open.koudaitong.com/api/entry?sign=bd1d2813d35e7c6294cc17a7a21c0a5a
-//&timestamp=2016-04-09 20:46:38&v=1.0&app_id=e1b70429940cd4aa66&method=kdt.trades.sold.get
-//&sign_method=md5&format=json&start_created=2016-03-09 00:00:00&end_created=2016-05-09 00:00:00
